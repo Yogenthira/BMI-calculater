@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="bmistyle.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="logo" href="#">BMI Calculator</a>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#table">BMI Table</a></li>
+            <li><a href="#calculator">BMI Calculator</a></li>
+        </ul>
+    </nav>
+    <section class="home" id="home">
+        <div>
+            <h1>BMI Introduction</h1>
+            <p>BMI is a measurement of a person's leanness or corpulence based on their height and weight, and is intended to quantify tissue mass. It is widely used as a general indicator of whether a person has a healthy body weight for their height. Specifically, the value obtained from the calculation of BMI is used to categorize whether a person is underweight, normal weight, overweight, or obese depending on what range the value falls between. These ranges of BMI vary based on factors such as region and age, and are sometimes further divided into subcategories such as severely underweight or very severely obese. Being overweight or underweight can have significant health effects, so while BMI is an imperfect measure of healthy body weight, it is a useful indicator of whether any additional testing or action is required. Refer to the table below to see the different categories based on BMI that are used by the calculator.</p>
+            <h1>Limitations of BMI</h1>
+            <p>Although BMI is a widely used and useful indicator of healthy body weight, it does have its limitations. BMI is only an estimate that cannot take body composition into account. Due to a wide variety of body types as well as distribution of muscle, bone mass, and fat, BMI should be considered along with other measurements rather than being used as the sole method for determining a person's healthy body weight.</p>
+        </div>
+    </section>
+    <section class="table" id="table">
+        <div>
+            <h1>BMI Table</h1>
+            <p>This is the World Health Organization's (WHO) recommended body weight based on BMI values for adults. It is used for both men and women, age 20 or older.</p>
+            <center>
+                <table border="1" cellpadding="10" style="border-collapse: collapse; text-decoration: dotted;">
+                    <tr>
+                        <th>Classification</th>
+                        <th>BMI range - kg/m²</th>
+                    </tr>
+                    <tr>
+                        <td>Severe Thinness</td>
+                        <td><16</td>
+                    </tr>
+                    <tr>
+                        <td>Moderate Thinness</td>
+                        <td>16 - 17</td>
+                    </tr>
+                    <tr>
+                        <td>Mild Thinness</td>
+                        <td>17 - 18.5</td>
+                    </tr>
+                    <tr>
+                        <td>Normal</td>
+                        <td>18.5 - 25</td>
+                    </tr>
+                    <tr>
+                        <td>Overweight</td>
+                        <td>25 - 30</td>
+                    </tr>
+                    <tr>
+                        <td>Obese Class I</td>
+                        <td>30 - 35</td>
+                    </tr>
+                    <tr>
+                        <td>Obese Class II</td>
+                        <td>35 - 40</td>
+                    </tr>
+                    <tr>
+                        <td>Obese Class III</td>
+                        <td>>40</td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+    </section>
+    <section class="calculator" id="calculator">
+        <div class="content">
+            <h2>BMI Calculator</h2>
+            <form id="bmi-form">
+                <div>
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" required>
+                </div>
+                <div>
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" required>
+                </div>
+                <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+            </form>
+            <p id="bmi-result"></p>
+        </div>
+    </section>
+    <footer>
+        <p>Created by <a href="https://www.linkedin.com/in/yogenthira-s-0b1b3b1b3/" style="color: black;">Yogenthira S</a></p>
+    </footer>
+    <script>
+        function calculateBMI() {
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+
+            if (height > 0 && weight > 0) {
+                const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+                let category = '';
+
+                if (bmi < 18.5) {
+                    category = 'Underweight';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    category = 'Normal weight';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    category = 'Overweight';
+                } else {
+                    category = 'Obese';
+                }
+
+                document.getElementById('bmi-result').textContent = `Your BMI is ${bmi} (${category})`;
+            } else {
+                document.getElementById('bmi-result').textContent = 'Please enter valid height and weight.';
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
